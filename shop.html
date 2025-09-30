@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesixseventh - Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Base Styles (Duplicated in all files) */
+        :root {
+            --color-primary: #1a1a1a;    /* Deep Charcoal/Black */
+            --color-secondary: #f4f4f4;  /* Soft Cream/Off-White */
+            --color-accent: #3A8D8B;     /* Distinctive Teal */
+            --color-text-dark: #333333;
+            --color-text-light: #eeeeee;
+            --font-main: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::-webkit-scrollbar {
+            display: none; /* Hides the scrollbar */
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text-dark);
+            background-color: var(--color-secondary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* -------------------- Header and Navigation -------------------- */
+        header {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a, .cart-icon {
+            background: none;
+            border: none;
+            color: var(--color-text-light);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        nav a:hover, .cart-icon:hover {
+            color: var(--color-accent);
+        }
+        
+        .cart-icon {
+            font-size: 1.2rem;
+            margin-left: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #cart-count {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50%;
+            padding: 2px 6px;
+            line-height: 1;
+        }
+
+        /* -------------------- Main Content Setup -------------------- */
+        main {
+            flex-grow: 1;
+            padding: 0 5%;
+        }
+        
+        .motto {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-accent);
+            margin: 2rem 0 1rem;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: var(--color-primary);
+        }
+        
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* -------------------- Shop Page Specific Styles -------------------- */
+        #shop {
+            padding: 3rem 0 0; /* Adjusted padding to remove bottom space */
+        }
+        
+        #newcomer {
+            padding: 3rem 0; /* Padding for the new section */
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem; /* Add space below the grid */
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #e0e0e0;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.25rem;
+            font-family: var(--font-serif);
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border: 2px solid var(--color-primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+            text-decoration: none; 
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        /* -------------------- Footer -------------------- */
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        /* -------------------- Responsive Design -------------------- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 0.5rem;
+                gap: 1rem;
+            }
+            
+            .cart-icon {
+                margin-left: 0;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation -->
+    <header>
+        <a href="index.html" class="brand-logo">Thesixseventh</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li>
+                    <a href="cart.html">
+                        🛒 Cart (<span id="cart-count">3</span>)
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <div class="motto">"Discover the unthinkable"</div>
+
+        <!-- Shop Page Section -->
+        <section id="shop">
+            <h2>Our Bestseller</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="/images/Slipper.jpeg" alt="grass-slipper" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/300x250/cccccc/333333?text=Product+Image'">
+                    <div class="product-info">
+                        <h3>Therapy slipper</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Feel the fields</p>
+                        <p class="product-price">Rp.90.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/images/Blackglass.jpeg" alt="Minimalistic blackglasses" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/300x250/cccccc/333333?text=Product+Image'">
+                    <div class="product-info">
+                        <h3>Minimalist Blackglass</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Fun decoration for your loved ones</p>
+                        <p class="product-price">Rp. 30.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/images/Spoon.jpeg" alt="Spoon" class="product-image" >
+                    <div class="product-info">
+                        <h3>The Spoon</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Useful eating utensil</p>
+                        <p class="product-price">Rp.20.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/images/Siram.jpeg" alt="Watering pot" class="product-image">
+                    <div class="product-info">
+                        <h3>Fun Watering Pot</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Reliable storage of water</p>
+                        <p class="product-price">Rp. 50.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Newcomer -->
+        <section id="newcomer">
+            <div class="h2-container">
+                <h2>Our Newcomer Selections</h2>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="/images/Unimeat.jpeg" alt="Unicorn-meat" class="product-image">
+                    <div class="product-info">
+                        <h3>Unicorn meat</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Exotic Product</p>
+                        <p class="product-price">Rp.2.000.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/images/Diet-Water.jpeg" alt="Diet Water" class="product-image">
+                    <div class="product-info">
+                        <h3>Diet Water</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Keep your calories in check.</p>
+                        <p class="product-price">Rp. 10.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/images/Cornelius.jpeg" alt="Corn man" class="product-image" >
+                    <div class="product-info">
+                        <h3>Corn Man</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #666;">Limited edition action figure.</p>
+                        <p class="product-price">Rp.200.000</p>
+                        <a href="cart.html" class="add-to-cart-btn">Add to Basket</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Thesixseventh. All rights reserved. | Discover the unthinkable.
+    </footer>
+
+</body>
+</html>

@@ -1,2 +1,2 @@
-# PPW-Assignmentpage.github.io
-For E-commerse PPW assignment
+# AssignmentPPW
+e commerse-ui for ppw assignment
